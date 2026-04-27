@@ -25,4 +25,8 @@ def split(df, train=0.7, val=0.8, time_col="Date Time"):
 
     print(f"\nNumber of features to be used: {len(features)}")
 
-    return train_df, val_df, test_df, features
+    train_data = train_df[features]
+    val_data = val_df[features]
+    test_data = test_df[features]
+
+    return train_data, val_data, test_data, features
