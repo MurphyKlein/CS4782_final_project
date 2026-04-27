@@ -6,7 +6,7 @@ class TimeSeriesDataset(Dataset):
     def __init__(self, data, seq_len, pred_len):
         """
         Args:
-            data: Standardized numpy array of shape
+            data: Numpy array of shape
                 (num_timesteps, num_features)
             seq_len: The look-back window (L)
             pred_len: The forecasting horizon (T)

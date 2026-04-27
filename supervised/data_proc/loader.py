@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader
 from .dataset import TimeSeriesDataset
 
 
-def dloader(train_data, val_data, test_data, batch_size=32, L=36, T=96):
+def dloader(train_data, val_data, test_data, batch_size=32, L=336, T=96):
 
     # 1. Create Dataset instances
     train_dataset = TimeSeriesDataset(train_data.values, seq_len=L, pred_len=T)
