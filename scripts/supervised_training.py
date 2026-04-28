@@ -20,7 +20,9 @@ def sup_train(
     model_path,
     targets,
 ):
-    criterion = nn.MSELoss()
+    device = torch.device(device)
+    model = model.to(device)
+    criterion = nn.MSELoss().to(device)
     optimizer = optim.Adam(model.parameters(), lr=1e-4)
     early_stopping = EarlyStopping(patience=10, verbose=True)
 
@@ -34,7 +36,7 @@ def sup_train(
             train_loader,
             optimizer,
             criterion,
-            device
+            device,
         )
 
         # Validation phase
@@ -62,7 +64,8 @@ def sup_train(
 
     # 4. Final Evaluation for this Horizon
     print(f"\nEvaluating final performance for T={T}...")
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    model = model.to(device)
     test_mse, test_mae = evaluate(model, test_loader, criterion, device)
 
     print(f"--- Final Results for T={T} (Replication vs. Paper) ---")
